@@ -4,7 +4,7 @@ A recipe library for readable, up-to-date documentation in projects with SDD (sp
 
 You do not install the library. You copy templates, prompts, and skills from it into your project.
 
-> Status: draft. Only the core is ready now. See the table "What is in the repository".
+> Status: draft. The rules, templates, and prompts are ready. See the table "What is in the repository".
 
 ## Who it is for
 
@@ -35,8 +35,9 @@ docs/
 1. Create the `docs/` folder in your project.
 2. Copy `en/templates/docs/DOCS-RULES.md` to `docs/DOCS-RULES.md`.
 3. Copy `en/templates/docs/MAP.md` to `docs/MAP.md`.
-4. Fill in the map. The instructions are at the start of the file.
-5. Add this section to `AGENTS.md` or `CLAUDE.md`:
+4. Copy `en/templates/docs/glossary.md` to `docs/glossary.md`.
+5. Fill in the map. The instructions are at the start of the file.
+6. Add this section to `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md`:
 
    ```markdown
    ## Documentation
@@ -44,7 +45,10 @@ docs/
    - After a change to a specification or to code behavior, update the guides by `docs/DOCS-RULES.md`, section 6 "How to update".
    - For domain concepts, use only terms from the glossary.
    ```
-6. If the project has skills, connect them by `en/patches/README.md`.
+7. If the project has skills, connect them by `en/patches/README.md`.
+
+To let an AI agent do this work, run the prompts from `en/prompts/` in order: from `00-explore.md` to `04-integrate.md`.
+For a small project, use one prompt: `en/prompts/full-setup.md`.
 
 ## What is in the repository
 
@@ -52,10 +56,10 @@ docs/
 |---|---|---|
 | `en/templates/docs/DOCS-RULES.md` | Single set of rules: writing, glossary, updates, verification, report | Ready |
 | `en/templates/docs/MAP.md` | Project map template | Ready |
+| `en/templates/docs/` | Other templates: route, glossary, guides | Ready |
+| `en/prompts/` | One-time tasks for an agent | Ready |
 | `en/patches/README.md` | How to find the skill type and what to insert into it | Ready |
 | `en/patches/` | Patch files | In progress |
-| `en/templates/docs/` | Other templates: route, glossary, guides | In progress |
-| `en/prompts/` | One-time tasks for an agent | In progress |
 | `en/skills/` | New skills to copy | In progress |
 | `en/integrations/` | Setup for a specific tool | In progress |
 | `en/concepts/` | Explanation of the idea for people | In progress |
