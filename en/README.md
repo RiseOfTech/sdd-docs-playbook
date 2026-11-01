@@ -4,7 +4,7 @@ A recipe library for readable, up-to-date documentation in projects with SDD (sp
 
 You do not install the library. You copy templates, prompts, and skills from it into your project.
 
-> Status: draft. The rules, templates, and prompts are ready. See the table "What is in the repository".
+> Status: draft. The rules, templates, prompts, patches, and the update and verification skills are ready. See the table "What is in the repository".
 
 ## Who it is for
 
@@ -30,6 +30,15 @@ docs/
         └── dev.md       how and where
 ```
 
+## How it works
+
+1. Once: create the documentation: the map, the glossary, the rules, the first guides.
+2. Once: connect the skills: copy `docs-sync` and `docs-review`, insert the patches into the project skills.
+3. Then work as usual.
+4. After you implement a change, `docs-sync` updates the guides, the glossary, and the map.
+5. Before a review and an archive, `docs-review` checks the documentation.
+6. If `docs-review` finds errors, the `archive.md` patch forbids the archive.
+
 ## Quick start
 
 1. Create the `docs/` folder in your project.
@@ -54,14 +63,12 @@ For a small project, use one prompt: `en/prompts/full-setup.md`.
 
 | Path | What it is | Status |
 |---|---|---|
-| `en/templates/docs/DOCS-RULES.md` | Single set of rules: writing, glossary, updates, verification, report | Ready |
-| `en/templates/docs/MAP.md` | Project map template | Ready |
-| `en/templates/docs/` | Other templates: route, glossary, guides | Ready |
+| `en/templates/docs/` | Templates: rules, map, route, glossary, guides | Ready |
 | `en/prompts/` | One-time tasks for an agent | Ready |
-| `en/patches/README.md` | How to find the skill type and what to insert into it | Ready |
-| `en/patches/` | Patch files | In progress |
-| `en/skills/` | New skills to copy | In progress |
-| `en/integrations/` | Setup for a specific tool | In progress |
+| `en/patches/` | Inserts for project skills. Start with `en/patches/README.md` | Ready |
+| `en/skills/docs-sync/`, `en/skills/docs-review/` | Update and verification skills | Ready |
+| `en/integrations/openspec.md`, `en/integrations/agents-md.md` | Setup for OpenSpec and agent instruction files | Ready |
+| Other files in `en/skills/` and `en/integrations/` | Other skills and integrations | In progress |
 | `en/concepts/` | Explanation of the idea for people | In progress |
 | `en/notes/` | Large projects, weaker models | In progress |
 
