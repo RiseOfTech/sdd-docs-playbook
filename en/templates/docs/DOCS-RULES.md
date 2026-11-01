@@ -24,7 +24,7 @@ Refer to a section like this: section 7 "Verification".
 4. For domain concepts, use only terms from `docs/glossary.md`. Use them with the meaning from the glossary.
 5. Do not replace a term with a synonym. Repeating a term is normal.
 6. Write names of classes, methods, files, and tables in `backticks`.
-7. Write a condition like this: "If <condition>, <who> <action>."
+7. Write a condition like this: `If <condition>, <who> <action>.`
 8. Write a warning like this: the command first, then the reason.
    - "Do not call `save()` in a loop. This creates many database queries."
 9. A guide fits on one screen (about 60 lines). If it is longer, split the area.
