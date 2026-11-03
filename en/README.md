@@ -4,11 +4,12 @@ A recipe library for readable, up-to-date documentation in projects with SDD (sp
 
 You do not install the library. You copy templates, prompts, and skills from it into your project.
 
-> Status: draft. The rules, templates, prompts, patches, and the update and verification skills are ready. See the table "What is in the repository".
+> Version 0.1. The rules, templates, prompts, patches, the update and verification skills, and the integration with OpenSpec and with agent instruction files are ready. For changes between versions, see `CHANGELOG.md`.
 
 ## Who it is for
 
-For analysts, developers, and team leads. It fits projects with OpenSpec, Spec Kit, or without SDD.
+For analysts, developers, and team leads.
+A ready integration exists for OpenSpec. For another SDD tool, `en/prompts/04-integrate.md` describes how to connect it.
 
 ## What problem it solves
 
@@ -39,7 +40,63 @@ docs/
 5. Before a review and an archive, `docs-review` checks the documentation.
 6. If `docs-review` finds errors, the `archive.md` patch forbids the archive.
 
-## Quick start
+## Preparation
+
+The agent copies files from the library into your project. So the agent needs access to the library folder.
+
+1. Download the library. Put it next to your project:
+
+   ```
+   ~/dev/
+   ├── my-project/          your project
+   └── sdd-docs-playbook/   this library
+   ```
+
+   To download with git, run this command in the `~/dev/` folder:
+
+   ```
+   git clone https://github.com/RiseOfTech/sdd-docs-playbook.git
+   ```
+
+   Without git: on the repository page, click "Code", then "Download ZIP". Unpack the archive into `~/dev/sdd-docs-playbook/`.
+2. Open the agent in the folder of your project. Do not open the agent in the library folder.
+3. Give the agent access to the library folder:
+   - Claude Code: run the command `/add-dir ../sdd-docs-playbook`. Another way: start the agent with the command `claude --add-dir ../sdd-docs-playbook`.
+   - GigaCode, OpenCode, and other tools: add the library folder to the workspace. To learn how, see the documentation of the tool.
+4. Check the access. Write to the agent:
+
+   ```
+   Open the file ../sdd-docs-playbook/en/README.md and name its first heading.
+   ```
+
+   If the agent cannot open the file, do step 3 again.
+
+## How to run the prompts
+
+1. For each prompt, start a new agent session. Then the work of one prompt fits into one session.
+2. Write to the agent:
+
+   ```
+   Follow the instructions from the file ../sdd-docs-playbook/en/prompts/00-explore.md
+   ```
+
+3. At each **STOP** step, the agent waits for your answer. Check the result and answer.
+4. Run the prompts in order:
+
+   | Prompt | How many times | Result |
+   |---|---|---|
+   | `00-explore.md` | Once | List of project tools, skills, and areas |
+   | `01-map.md` | Once | `docs/DOCS-RULES.md`, `docs/MAP.md` |
+   | `02-glossary.md` | Once | `docs/glossary.md` and term conflicts |
+   | `03-guide-area.md` | For each area | Guides of the area, and `docs/ONBOARDING.md` on the first area |
+   | `04-integrate.md` | Once | Patches in the project skills, the `docs-sync` and `docs-review` skills |
+   | `05-audit.md` | Once a month or a quarter | Report on outdated guides |
+
+   The agent marks finished stages in `docs/_setup/progress.md`.
+
+For a small project, use one prompt: `en/prompts/full-setup.md`.
+
+## How to start without an agent
 
 1. Create the `docs/` folder in your project.
 2. Copy `en/templates/docs/DOCS-RULES.md` to `docs/DOCS-RULES.md`.
@@ -56,21 +113,22 @@ docs/
    ```
 7. If the project has skills, connect them by `en/patches/README.md`.
 
-To let an AI agent do this work, run the prompts from `en/prompts/` in order: from `00-explore.md` to `04-integrate.md`.
-For a small project, use one prompt: `en/prompts/full-setup.md`.
-
 ## What is in the repository
 
-| Path | What it is | Status |
-|---|---|---|
-| `en/templates/docs/` | Templates: rules, map, route, glossary, guides | Ready |
-| `en/prompts/` | One-time tasks for an agent | Ready |
-| `en/patches/` | Inserts for project skills. Start with `en/patches/README.md` | Ready |
-| `en/skills/docs-sync/`, `en/skills/docs-review/` | Update and verification skills | Ready |
-| `en/integrations/openspec.md`, `en/integrations/agents-md.md` | Setup for OpenSpec and agent instruction files | Ready |
-| Other files in `en/skills/` and `en/integrations/` | Other skills and integrations | In progress |
-| `en/concepts/` | Explanation of the idea for people | In progress |
-| `en/notes/` | Large projects, weaker models | In progress |
+| Path | What it is |
+|---|---|
+| `en/templates/docs/` | Templates: rules, map, route, glossary, guides |
+| `en/prompts/` | One-time tasks for an agent |
+| `en/patches/` | Inserts for project skills. Start with `en/patches/README.md` |
+| `en/skills/` | The `docs-sync` (update) and `docs-review` (verification) skills |
+| `en/integrations/` | Setup for OpenSpec and for agent instruction files |
+
+## Plans
+
+- A skill to add and rename terms.
+- A skill that answers questions about the project from the map and the guides.
+- Explanation of the idea for people. Notes on large projects and weaker models.
+- An open example project with documentation built by this library.
 
 ## License
 

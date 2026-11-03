@@ -36,7 +36,8 @@ Copy the files from the `sdd-docs-playbook` library:
 | `en/templates/docs/DOCS-RULES.md` | `docs/DOCS-RULES.md` |
 | `en/templates/docs/MAP.md` | `docs/MAP.md` |
 
-If you have no access to these files, ask the user to add them. Do not write their text from memory.
+Paths `en/...` start from the library folder. Usually it is next to the project: `../sdd-docs-playbook/`.
+If you have no access to the library files, stop. Ask the user to give access by the library file `en/README.md`, section "Preparation". Do not write the text of library files from memory.
 If a file already exists in `docs/`, stop and ask the user.
 
 ## Step 3. Fill in the map

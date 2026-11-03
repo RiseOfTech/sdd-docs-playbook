@@ -32,7 +32,9 @@ Run this prompt after the pilot guides. You can write the guides of other areas 
 4. Open the library file `en/patches/README.md`.
 
 If one of the files in `docs/` does not exist, or `docs/guide/` has no guides, stop. Tell the user: "Run the prompt `03-guide-area.md` first."
-If you have no access to the library files, ask the user to add them. Do not write their text from memory.
+
+Paths `en/...` in this prompt start from the `sdd-docs-playbook` library folder. Usually it is next to the project: `../sdd-docs-playbook/`.
+If you have no access to the library files, stop. Ask the user to give access by the library file `en/README.md`, section "Preparation". Do not write the text of library files from memory.
 
 ## Step 2. Decide for each existing skill
 
@@ -51,10 +53,11 @@ Choose all rows of the table that apply.
 | If the project has | Integrate like this |
 |---|---|
 | `openspec/config.yaml` | By the file `en/integrations/openspec.md`. |
-| Another SDD tool with a task template | By the file `en/integrations/spec-kit.md`. |
+| Another SDD tool with a task template | Add the items to the task template from the file `en/integrations/openspec.md`, step 2, the `tasks` key. Write the path to the template file in the plan. |
 | `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` | By the file `en/integrations/agents-md.md`. |
 | A skills folder | Copy `en/skills/docs-sync/` and `en/skills/docs-review/` to the skills folder of the project. |
-| None of these | By the file `en/integrations/no-sdd.md`. |
+
+If the project has no SDD tool, stop. Tell the user: "The library is for projects with SDD. No SDD tool was found in the project." Wait for the decision of the user.
 
 ## Step 4. Write the plan
 

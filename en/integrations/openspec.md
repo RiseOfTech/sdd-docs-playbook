@@ -29,8 +29,9 @@ If the `context` key does not exist, create it as `context: |`. Then add the tex
   specs:
     - Use terms from docs/glossary.md with the meaning from the glossary.
   tasks:
-    - The next-to-last task is to update the guides by docs/DOCS-RULES.md, section 6 "How to update".
-    - The last task is to verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - Add a task to the end of the list - update the guides by docs/DOCS-RULES.md, section 6 "How to update".
+    - After it, add a task - verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - If another rule requires its own last task (for example, a build), put the guide tasks before it.
 ```
 
 If the `rules` key does not exist, create it. Then add the text under it.
@@ -39,6 +40,7 @@ If the `rules` key does not exist, create it. Then add the text under it.
 
 1. If `rules` already has `proposal`, `specs`, or `tasks`, do not create a second key with that name. Add the items to the end of the existing list.
 2. If a new item contradicts an existing item, do not change the existing item. Ask the user.
+   A rule about the last task (for example, "finish with a build") is not a contradiction. The third `tasks` item puts the guide tasks before that task.
 3. Keep the indentation of the file. YAML does not work with wrong indentation.
 4. Do not change other keys of the file.
 
@@ -53,6 +55,7 @@ context: |
 rules:
   tasks:
     - Each task changes one area.
+    - Finish with a task that runs the build.
 ```
 
 After:
@@ -70,6 +73,10 @@ rules:
     - Use terms from docs/glossary.md with the meaning from the glossary.
   tasks:
     - Each task changes one area.
-    - The next-to-last task is to update the guides by docs/DOCS-RULES.md, section 6 "How to update".
-    - The last task is to verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - Finish with a task that runs the build.
+    - Add a task to the end of the list - update the guides by docs/DOCS-RULES.md, section 6 "How to update".
+    - After it, add a task - verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - If another rule requires its own last task (for example, a build), put the guide tasks before it.
 ```
+
+With these rules, OpenSpec creates the tasks in this order: change tasks, guide update, guide verification, build.

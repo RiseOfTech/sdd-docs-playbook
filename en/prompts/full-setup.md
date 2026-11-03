@@ -65,28 +65,47 @@ Check each item. For each item, write "found" (path) or "not found".
 - `.claude/skills/*/SKILL.md`, `.claude/commands/*`, `.claude/agents/*`.
 - `.gigacode/skills/*/SKILL.md`, `.opencode/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md`.
 - `.cursor/rules/*`, `.github/copilot-instructions.md`, other files with rules for AI.
+- Rules and skills outside the repository. Sign: an instruction file refers to a path outside the project, for example `~/.config/<tool>/AGENTS.md` or `~/.claude/skills/`. Write down the path. Do not open the file. Add a question for the user: whether to take this file into account.
 
 **Documentation:**
 - `README.md`, `docs/`, `wiki/`, `adr/`, other folders with `.md` files.
+- Glossaries and lists of terms. Look for separate files and for sections inside documents. For example, the "Terms" section in `README.md`. Write down the path and the section name.
+
+**Documentation language:**
+- The language of the project specifications and documentation.
 
 **Domain (search):**
 - Main packages with business logic (for example, `domain`, `service`, `model`).
 - SQL scripts, data schemas.
 
-### Step 1.2. Read the skills and rules that you found
+### Step 1.2. Read the skills, rules, and documents that you found
 
 For each skill and rules file, write one line:
 `<path> — <what it does> — <when it runs>`.
 
 Mark the skills that relate to: review, tasks, specifications, documentation.
 
+For each document from the "Documentation" item of step 1.1, choose an assessment:
+- "current" — the facts from the document match the code;
+- "partly outdated" — some facts do not match the code;
+- "outdated" — the document describes behavior or a process that no longer exists;
+- "unknown" — you could not check the facts.
+
+To choose the assessment, check 2–3 facts from the document against the code: class names, settings, dependencies. Write down the reason: which fact matched or did not match.
+
 ### Step 1.3. Define the areas (capabilities)
 
 - If `openspec/specs/<name>/` exists, each folder = one area.
 - If the project has another SDD tool, use its division.
-- If there are no specifications, an area = a module or a main package of business logic.
+- If the project has no SDD tool, add a question for the user: "The library is for projects with SDD. No SDD tool was found in the project. Continue?" Propose areas by modules or packages of business logic.
+- If the specifications are divided by work stages, not by areas, do not use their division. Propose areas by the code. Add a question for the user.
 
-Write down the list of areas. For each area: name, path to the specification (if any), main code package.
+Write down the list of areas. For each area: name, path to the specification (if any), paths to the code.
+
+Paths to the code:
+- If the area has its own folder or package, write down the path to it.
+- If the code is divided by layers (for example, `controller`, `service`, `repository`), all areas have the same packages. Then for each layer, write down the files of the area or a name mask. Example for the library service: `service/Loan*`, `repository/LoanRepository.java`.
+- Each path belongs to only one area. If two areas need one file, add a question for the user.
 
 ### Step 1.4. Write the report
 
@@ -105,16 +124,22 @@ Create `docs/_setup/inventory.md`. Structure:
 | Path | What it does | When it runs | Related to documentation? |
 |---|---|---|---|
 
+## Documentation language
+<language of the specifications and documentation>
+
 ## Existing documentation
-<paths and a short assessment: current / outdated / unknown>
+| Path | Assessment | Reason |
+|---|---|---|
 
 ## Areas
-| Area | Specification | Main package |
+| Area | Specification | Paths to the code |
 |---|---|---|
 
 ## Questions for the user
 <list or "none">
 ```
+
+If the project language does not match the language of this prompt, add a question: which language to use for the documentation. For Russian, use `ru/prompts/full-setup.md`. For English, use `en/prompts/full-setup.md`.
 
 Create `docs/_setup/progress.md`:
 
@@ -166,10 +191,11 @@ Choose all rows of the table that apply.
 | If the project has | Integrate like this |
 |---|---|
 | `openspec/config.yaml` | Add `context` and `rules` (the text is in stage 8). |
-| Another SDD tool with a task template | Add the item "Update the guides" to the task template. |
+| Another SDD tool with a task template | Add the items from stage 8.1, the `tasks` key, to the task template. Write the path to the template file in the plan. |
 | `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` | Add a short section with a link to `docs/DOCS-RULES.md`. |
 | A skills folder | Create the `docs-sync` and `docs-review` skills (the text is in stage 8). |
-| None of these | Only `docs/DOCS-RULES.md` and a section in `README.md`. |
+
+If the project has no SDD tool, stop. Tell the user: "The library is for projects with SDD. No SDD tool was found in the project." Wait for the decision of the user.
 
 ### Step 2.3. Write the plan
 
@@ -567,6 +593,8 @@ Goal: collect the project terms.
 
 ### Step 5.1. Collect candidates
 
+If `docs/_setup/inventory.md` lists a glossary or a section with terms, read it first. Take the first candidates from it.
+
 For each area:
 1. Read the specification of the area, if it exists.
 2. Open the main domain classes (entities, services, DTOs).
@@ -775,9 +803,12 @@ Add to `rules` (merge with existing rules):
   specs:
     - Use terms from docs/glossary.md with the meaning from the glossary.
   tasks:
-    - The next-to-last task is to update the guides by docs/DOCS-RULES.md, section 6 "How to update".
-    - The last task is to verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - Add a task to the end of the list - update the guides by docs/DOCS-RULES.md, section 6 "How to update".
+    - After it, add a task - verify the guides by docs/DOCS-RULES.md, section 7 "Verification".
+    - If another rule requires its own last task (for example, a build), put the guide tasks before it.
 ```
+
+A rule about the last task (for example, "finish with a build") is not a contradiction. The third `tasks` item puts the guide tasks before that task.
 
 ### 8.2. If `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` exists
 
@@ -852,7 +883,10 @@ description: Verifies the docs/guide guides, the docs/glossary.md glossary, and 
 5. Compare the changes with `docs/DOCS-RULES.md`, section 5 "When to update".
 
    If a file needed an update and it did not change, write an error: "no + where".
+   If an area has no guides, do not write an error about the guides. See step 6.
 6. Work on areas one at a time. For each area, follow `docs/DOCS-RULES.md`, section 7 "Verification".
+
+   If an area has no guides, this is not an error. Do not verify the guides of this area. Write the area in the "Questions" line of the report.
 7. Print the report by `docs/DOCS-RULES.md`, section 8 "Report after the update". In the "Changed files" line, write "none".
 8. Add the line `Result: <no errors / errors found>` at the end of the report. If there is at least one "no" item, write "errors found".
 ```
@@ -867,6 +901,11 @@ Example for a task review skill:
 ```
 
 Do not change the rest of the skill text.
+
+Special cases:
+- The skill has other copies of its text. For example, the `.claude/commands/opsx/archive.md` command and the `.claude/skills/openspec-archive-change/SKILL.md` skill. Add the line to each copy in the same way.
+- A generator created the skill (the `generatedBy` field). The update command of the tool can delete the line. Tell the user: after you update the tool, check this line.
+- The skill is outside the repository (for example, in `~/.claude/skills/`). Do not change it. Tell the user which line to add. The user gives it to the owner of the skill.
 
 ### 8.5. README
 

@@ -37,10 +37,13 @@ Copy the file from the `sdd-docs-playbook` library:
 |---|---|
 | `en/templates/docs/glossary.md` | `docs/glossary.md` |
 
-If you have no access to this file, ask the user to add it. Do not write its text from memory.
+Paths `en/...` start from the library folder. Usually it is next to the project: `../sdd-docs-playbook/`.
+If you have no access to the library files, stop. Ask the user to give access by the library file `en/README.md`, section "Preparation". Do not write the text of library files from memory.
 If the file already exists in `docs/`, stop and ask the user.
 
 ## Step 3. Collect candidates
+
+If `docs/_setup/inventory.md` lists a glossary or a section with terms, read it first. Take the first candidates from it.
 
 For each area:
 1. Read the specification of the area, if it exists.

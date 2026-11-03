@@ -17,9 +17,23 @@ A patch is a short insert for a project skill. A patch connects the skill to `do
 3. Open the file from the "Patch" column.
 4. Insert the patch text into the steps of the skill.
 5. Do not change the other text of the skill.
+6. Find other copies of the skill text. For example, in Claude Code the `/opsx:archive` command is in `.claude/commands/opsx/archive.md`, and the archive skill is in `.claude/skills/openspec-archive-change/SKILL.md`. These are two copies of one text. Insert the patch into each copy in the same way.
 
 If a skill fits two types, ask the user.
 If a skill fits no type, leave it unchanged.
+
+## Special cases
+
+**A generator created the skill.** Sign: the skill has the `generatedBy` field or a note about generation. The update command of the tool can overwrite such a file and delete the patch. For example, `openspec update`.
+1. After you update the tool, check that the patch is in place.
+2. If the patch is not there, insert it again.
+
+The rules from `en/integrations/openspec.md` are in `openspec/config.yaml`, not in the skill files. So an overwrite of the skills does not delete them.
+
+**The skill is outside the repository.** For example, in `~/.claude/skills/`. Other projects can use such a skill.
+1. Do not change this skill.
+2. Tell the user which patch the skill needs.
+3. The user gives the patch text to the owner of the skill.
 
 ## Type table
 
