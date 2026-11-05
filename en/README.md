@@ -58,11 +58,14 @@ The agent copies files from the library into your project. So the agent needs ac
    git clone https://github.com/RiseOfTech/sdd-docs-playbook.git
    ```
 
-   Without git: on the repository page, click "Code", then "Download ZIP". Unpack the archive into `~/dev/sdd-docs-playbook/`.
+   Without git: on the repository page, click "Code", then "Download ZIP". Unpack the archive into the `~/dev/` folder.
+
+   The library folder must have the name `sdd-docs-playbook`. If the archive unpacked into a folder with a different name, for example `sdd-docs-playbook-main` or `sdd-docs-playbook-0.1.0`, rename it.
 2. Open the agent in the folder of your project. Do not open the agent in the library folder.
 3. Give the agent access to the library folder:
    - Claude Code: run the command `/add-dir ../sdd-docs-playbook`. Another way: start the agent with the command `claude --add-dir ../sdd-docs-playbook`.
-   - GigaCode, OpenCode, and other tools: add the library folder to the workspace. To learn how, see the documentation of the tool.
+   - GigaCode: run the command `/dir add ../sdd-docs-playbook`.
+   - OpenCode and other tools: add the library folder to the workspace. To learn how, see the documentation of the tool.
 4. Check the access. Write to the agent:
 
    ```
@@ -94,9 +97,13 @@ The agent copies files from the library into your project. So the agent needs ac
 
    The agent marks finished stages in `docs/_setup/progress.md`.
 
+   If the project documentation is already in a different folder, for example `documentation/`, the prompt `00-explore.md` asks where to create the files. If you choose that folder, all files from the table appear in it instead of `docs/`.
+
 For a small project, use one prompt: `en/prompts/full-setup.md`.
 
 ## How to start without an agent
+
+If the project documentation is already in a different folder, use it instead of `docs/` in the steps below and in the copied files.
 
 1. Create the `docs/` folder in your project.
 2. Copy `en/templates/docs/DOCS-RULES.md` to `docs/DOCS-RULES.md`.

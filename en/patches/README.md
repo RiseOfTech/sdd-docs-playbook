@@ -17,7 +17,7 @@ A patch is a short insert for a project skill. A patch connects the skill to `do
 3. Open the file from the "Patch" column.
 4. Insert the patch text into the steps of the skill.
 5. Do not change the other text of the skill.
-6. Find other copies of the skill text. For example, in Claude Code the `/opsx:archive` command is in `.claude/commands/opsx/archive.md`, and the archive skill is in `.claude/skills/openspec-archive-change/SKILL.md`. These are two copies of one text. Insert the patch into each copy in the same way.
+6. Find other copies of the skill text. For example, in Claude Code the `/opsx:archive` command is in `.claude/commands/opsx/archive.md`, and the archive skill is in `.claude/skills/openspec-archive-change/SKILL.md`. These are two copies of one text. GigaCode works the same way: the skill `.gigacode/skills/openspec-archive-change/SKILL.md` and a command in `.gigacode/commands/`. Insert the patch into each copy in the same way.
 
 If a skill fits two types, ask the user.
 If a skill fits no type, leave it unchanged.

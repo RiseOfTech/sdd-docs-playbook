@@ -20,6 +20,17 @@ Result: the files `docs/_setup/inventory.md` and `docs/_setup/progress.md`.
 
 **If the work was interrupted:** open `docs/_setup/inventory.md`. Continue from the first section that is not filled in.
 
+## Step 0. Choose the documentation root
+
+The documentation root is the folder that holds all documentation files. By default, it is `docs/`.
+
+1. Check the project root. Find folders with `.md` files, for example `docs/`, `documentation/`, `wiki/`.
+2. If there is no `docs/` folder but another documentation folder exists, stop. Ask the user: "The project documentation is in `<folder>/`. Create the documentation files in it or in a new `docs/` folder?"
+3. Write down the answer. This is the documentation root.
+4. If the documentation root is not `docs/`, replace `docs/` with the documentation root in all paths of this prompt. Example: `docs/_setup/inventory.md` becomes `documentation/_setup/inventory.md`.
+
+In all other cases, the documentation root is `docs/`.
+
 ## Step 1. Find files and write down what you found
 
 Check each item. For each item, write "found" (path) or "not found".
@@ -36,7 +47,8 @@ Check each item. For each item, write "found" (path) or "not found".
 **Instructions for agents:**
 - `AGENTS.md`, `CLAUDE.md`, `GIGACODE.md` (in the root and in subfolders).
 - `.claude/skills/*/SKILL.md`, `.claude/commands/*`, `.claude/agents/*`.
-- `.gigacode/skills/*/SKILL.md`, `.opencode/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md`.
+- `.gigacode/skills/*/SKILL.md`, `.gigacode/commands/*`.
+- `.opencode/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md`.
 - `.cursor/rules/*`, `.github/copilot-instructions.md`, other files with rules for AI.
 - Rules and skills outside the repository. Sign: an instruction file refers to a path outside the project, for example `~/.config/<tool>/AGENTS.md` or `~/.claude/skills/`. Write down the path. Do not open the file. Add a question for the user: whether to take this file into account.
 
@@ -118,6 +130,8 @@ Create `docs/_setup/progress.md`:
 
 ```markdown
 # Adoption progress
+
+Documentation root: `<folder>/`
 
 - [x] 00. Explore the project
 - [ ] 01. Map

@@ -19,6 +19,10 @@ Result: the file `docs/glossary.md` and a list of conflicts for the user.
 8. Do not make commits or create branches unless the user asks.
 9. If this instruction contradicts the project rules (`AGENTS.md`, `CLAUDE.md`, `GIGACODE.md`, and so on), stop and ask the user.
 
+**Documentation root.** Open `docs/_setup/progress.md` and find the line "Documentation root". If the file does not exist, find the file `_setup/progress.md` in the project. If the documentation root is not `docs/`:
+- in all paths of this prompt, replace `docs/` with the documentation root;
+- in each text that you move from the library to the project, also replace `docs/` with the documentation root.
+
 **If the work was interrupted:** open `docs/glossary.md`. Continue from the next area in `docs/MAP.md`.
 
 ## Step 1. Read the result of the previous stage

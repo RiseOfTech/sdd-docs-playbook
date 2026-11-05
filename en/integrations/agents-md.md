@@ -15,6 +15,9 @@ Check the project root. For each file, write down: exists or does not exist.
 | Claude Code | `CLAUDE.md` |
 | GigaCode | `GIGACODE.md` |
 
+GigaCode reads only `GIGACODE.md`. It does not read `AGENTS.md` and `CLAUDE.md`.
+If the team works in GigaCode, the section must be in `GIGACODE.md`.
+
 If no file exists, ask the user which tool the team uses. Do not create a file yourself.
 
 ## Step 2. Add the section
@@ -31,5 +34,6 @@ Add this text to the end of each file that you found. Do not change the rest of 
 ## How to merge with existing text
 
 1. If the file already has a "Documentation" section, do not create a second one. Add the lines to the end of that section.
-2. If a line contradicts the existing text, do not change the existing text. Ask the user.
-3. If one file only links to another, add the section to the file it links to.
+2. If the file has a section with the same purpose under a different name, ask the user: add the lines to that section or create a "Documentation" section. Example: a "References" section with links to project documents.
+3. If a line contradicts the existing text, do not change the existing text. Ask the user.
+4. If one file only links to another, add the section to the file it links to. Exception: `GIGACODE.md`. Add the section to `GIGACODE.md` itself.
