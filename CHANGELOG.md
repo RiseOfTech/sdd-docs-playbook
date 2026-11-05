@@ -4,7 +4,7 @@
 
 ## English
 
-### 0.1.1
+### 0.1.1 — 2026-11-05
 
 Support for GigaCode and for a documentation folder with a different name.
 
@@ -28,7 +28,7 @@ This version is tested on a real project with OpenSpec and Claude Code.
 
 ## Русский
 
-### 0.1.1
+### 0.1.1 — 2026-11-05
 
 Поддержка GigaCode и папки документации с другим именем.
 
