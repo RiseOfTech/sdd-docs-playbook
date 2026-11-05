@@ -22,6 +22,10 @@ Run this prompt after the pilot guides. You can write the guides of other areas 
 10. Do not make commits or create branches unless the user asks.
 11. If this instruction contradicts the project rules (`AGENTS.md`, `CLAUDE.md`, `GIGACODE.md`, and so on), stop and ask the user.
 
+**Documentation root.** Open `docs/_setup/progress.md` and find the line "Documentation root". If the file does not exist, find the file `_setup/progress.md` in the project. If the documentation root is not `docs/`:
+- in all paths of this prompt, replace `docs/` with the documentation root;
+- in each text that you move from the library to the project, also replace `docs/` with the documentation root.
+
 **If the work was interrupted:** open `docs/_setup/plan.md`. Continue from the first item that is not done.
 
 ## Step 1. Read the result of the previous stages
@@ -55,7 +59,7 @@ Choose all rows of the table that apply.
 | `openspec/config.yaml` | By the file `en/integrations/openspec.md`. |
 | Another SDD tool with a task template | Add the items to the task template from the file `en/integrations/openspec.md`, step 2, the `tasks` key. Write the path to the template file in the plan. |
 | `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` | By the file `en/integrations/agents-md.md`. |
-| A skills folder | Copy `en/skills/docs-sync/` and `en/skills/docs-review/` to the skills folder of the project. |
+| A skills folder | Copy `en/skills/docs-sync/` and `en/skills/docs-review/` to the skills folder of the project. The folder name depends on the tool: see `en/patches/README.md`, section "How to apply", item 1. Example for GigaCode: `.gigacode/skills/docs-sync/`. |
 
 If the project has no SDD tool, stop. Tell the user: "The library is for projects with SDD. No SDD tool was found in the project." Wait for the decision of the user.
 

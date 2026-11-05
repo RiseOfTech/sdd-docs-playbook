@@ -4,6 +4,15 @@
 
 ## English
 
+### 0.1.1
+
+Support for GigaCode and for a documentation folder with a different name.
+
+- A documentation root. If the project documentation is in a different folder, for example `documentation/`, the prompt `00-explore.md` asks the user where to create the files. The other prompts read the answer from `_setup/progress.md`.
+- GigaCode: access to the library through `/dir add`, the skills folder `.gigacode/skills/`, the commands folder `.gigacode/commands/`. GigaCode reads only `GIGACODE.md`, so the "Documentation" section goes into this file.
+- Agent instruction files: a rule for a section with the same purpose under a different name.
+- README: the library folder must have the name `sdd-docs-playbook`, also after you unpack the ZIP archive.
+
 ### 0.1.0 — 2026-11-03
 
 The first version.
@@ -18,6 +27,15 @@ The first version.
 This version is tested on a real project with OpenSpec and Claude Code.
 
 ## Русский
+
+### 0.1.1
+
+Поддержка GigaCode и папки документации с другим именем.
+
+- Корень документации. Если документация проекта лежит в другой папке, например `documentation/`, промпт `00-explore.md` спрашивает пользователя, где создать файлы. Остальные промпты берут ответ из `_setup/progress.md`.
+- GigaCode: доступ к библиотеке через `/dir add`, папка навыков `.gigacode/skills/`, папка команд `.gigacode/commands/`. GigaCode читает только `GIGACODE.md`, поэтому раздел "Документация" стоит в этом файле.
+- Файлы инструкций агентов: правило для раздела с той же целью под другим именем.
+- README: папка библиотеки должна называться `sdd-docs-playbook`, в том числе после распаковки ZIP-архива.
 
 ### 0.1.0 — 2026-11-03
 

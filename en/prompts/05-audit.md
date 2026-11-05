@@ -17,6 +17,8 @@ Result: a report for the user. Do not change guides at this stage.
 5. If you are not sure about a fact, write `[VERIFY: <what exactly>]` in the report. Do not guess.
 6. If this instruction contradicts the project rules (`AGENTS.md`, `CLAUDE.md`, `GIGACODE.md`, and so on), stop and ask the user.
 
+**Documentation root.** This is the folder with the files `MAP.md` and `DOCS-RULES.md`, usually `docs/`. If the file `docs/MAP.md` does not exist, find the file `MAP.md` next to `DOCS-RULES.md` in the project. In all paths of this prompt, replace `docs/` with this folder.
+
 ## Step 1. Collect the list of guides
 
 1. Open `docs/MAP.md`.

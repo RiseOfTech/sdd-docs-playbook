@@ -17,7 +17,7 @@
 3. Открой файл из колонки "Патч".
 4. Вставь текст патча в шаги навыка.
 5. Не меняй остальной текст навыка.
-6. Найди другие копии текста навыка. Например, в Claude Code команда `/opsx:archive` лежит в `.claude/commands/opsx/archive.md`, а навык архива — в `.claude/skills/openspec-archive-change/SKILL.md`. Это две копии одного текста. Вставь патч в каждую копию одинаково.
+6. Найди другие копии текста навыка. Например, в Claude Code команда `/opsx:archive` лежит в `.claude/commands/opsx/archive.md`, а навык архива — в `.claude/skills/openspec-archive-change/SKILL.md`. Это две копии одного текста. В GigaCode так же: навык `.gigacode/skills/openspec-archive-change/SKILL.md` и команда в `.gigacode/commands/`. Вставь патч в каждую копию одинаково.
 
 Если навык подходит под два типа, спроси пользователя.
 Если навык не подходит ни под один тип, оставь его без изменений.

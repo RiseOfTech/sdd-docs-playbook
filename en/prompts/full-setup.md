@@ -18,8 +18,9 @@ Read this instruction completely. Then do the stages in order.
 8. Work on one area (capability) at a time. Do not keep several areas in progress.
 9. Do not make commits or create branches unless the user asks.
 10. If this instruction contradicts the project rules (`AGENTS.md`, `CLAUDE.md`, `GIGACODE.md`, and so on), stop and ask the user.
+11. If the documentation root is not `docs/` (step 1.0), replace `docs/` with the documentation root in all paths and texts of this prompt.
 
-**If the work was interrupted:** open `docs/_setup/progress.md`. Continue from the first step that is not finished.
+**If the work was interrupted:** open `docs/_setup/progress.md`. If the file does not exist, find the file `_setup/progress.md` in the project. Continue from the first step that is not finished.
 
 ---
 
@@ -47,6 +48,17 @@ Skills, configs, and agent instructions do not copy the rules. They only link to
 Goal: understand what the project is and which tools it already has.
 Create nothing except the report files.
 
+### Step 1.0. Choose the documentation root
+
+The documentation root is the folder that holds all documentation files. By default, it is `docs/`.
+
+1. Check the project root. Find folders with `.md` files, for example `docs/`, `documentation/`, `wiki/`.
+2. If there is no `docs/` folder but another documentation folder exists, stop. Ask the user: "The project documentation is in `<folder>/`. Create the documentation files in it or in a new `docs/` folder?"
+3. Write down the answer. This is the documentation root.
+4. If the documentation root is not `docs/`, replace `docs/` with the documentation root in all paths and texts of this prompt. Example: `docs/_setup/inventory.md` becomes `documentation/_setup/inventory.md`.
+
+In all other cases, the documentation root is `docs/`.
+
 ### Step 1.1. Find files and write down what you found
 
 Check each item. For each item, write "found" (path) or "not found".
@@ -63,7 +75,8 @@ Check each item. For each item, write "found" (path) or "not found".
 **Instructions for agents:**
 - `AGENTS.md`, `CLAUDE.md`, `GIGACODE.md` (in the root and in subfolders).
 - `.claude/skills/*/SKILL.md`, `.claude/commands/*`, `.claude/agents/*`.
-- `.gigacode/skills/*/SKILL.md`, `.opencode/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md`.
+- `.gigacode/skills/*/SKILL.md`, `.gigacode/commands/*`.
+- `.opencode/skills/*/SKILL.md`, `.agents/skills/*/SKILL.md`.
 - `.cursor/rules/*`, `.github/copilot-instructions.md`, other files with rules for AI.
 - Rules and skills outside the repository. Sign: an instruction file refers to a path outside the project, for example `~/.config/<tool>/AGENTS.md` or `~/.claude/skills/`. Write down the path. Do not open the file. Add a question for the user: whether to take this file into account.
 
@@ -146,6 +159,8 @@ Create `docs/_setup/progress.md`:
 ```markdown
 # Adoption progress
 
+Documentation root: `<folder>/`
+
 - [x] Stage 1. Explore the project
 - [ ] Stage 2. Integration plan
 - [ ] Stage 3. Rules and templates
@@ -193,7 +208,7 @@ Choose all rows of the table that apply.
 | `openspec/config.yaml` | Add `context` and `rules` (the text is in stage 8). |
 | Another SDD tool with a task template | Add the items from stage 8.1, the `tasks` key, to the task template. Write the path to the template file in the plan. |
 | `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` | Add a short section with a link to `docs/DOCS-RULES.md`. |
-| A skills folder | Create the `docs-sync` and `docs-review` skills (the text is in stage 8). |
+| A skills folder | Create the `docs-sync` and `docs-review` skills (the text is in stage 8). The folder name depends on the tool: Claude Code — `.claude/skills/`, GigaCode — `.gigacode/skills/`, OpenCode — `.opencode/skills/`, a shared folder — `.agents/skills/`. |
 
 If the project has no SDD tool, stop. Tell the user: "The library is for projects with SDD. No SDD tool was found in the project." Wait for the decision of the user.
 
@@ -812,6 +827,10 @@ A rule about the last task (for example, "finish with a build") is not a contrad
 
 ### 8.2. If `AGENTS.md`, `CLAUDE.md`, or `GIGACODE.md` exists
 
+GigaCode reads only `GIGACODE.md`. If the team works in GigaCode, add the section to `GIGACODE.md`, even if this file links to another file.
+
+If the file has a section with the same purpose under a different name, ask the user: add the lines to that section or create a "Documentation" section. Example: a "References" section with links to project documents.
+
 Add this section:
 
 ```markdown
@@ -903,7 +922,7 @@ Example for a task review skill:
 Do not change the rest of the skill text.
 
 Special cases:
-- The skill has other copies of its text. For example, the `.claude/commands/opsx/archive.md` command and the `.claude/skills/openspec-archive-change/SKILL.md` skill. Add the line to each copy in the same way.
+- The skill has other copies of its text. For example, the `.claude/commands/opsx/archive.md` command and the `.claude/skills/openspec-archive-change/SKILL.md` skill. GigaCode works the same way: the skill `.gigacode/skills/openspec-archive-change/SKILL.md` and a command in `.gigacode/commands/`. Add the line to each copy in the same way.
 - A generator created the skill (the `generatedBy` field). The update command of the tool can delete the line. Tell the user: after you update the tool, check this line.
 - The skill is outside the repository (for example, in `~/.claude/skills/`). Do not change it. Tell the user which line to add. The user gives it to the owner of the skill.
 

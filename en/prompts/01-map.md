@@ -18,6 +18,10 @@ Result: the files `docs/DOCS-RULES.md` and `docs/MAP.md`. Do not write guides at
 7. Do not make commits or create branches unless the user asks.
 8. If this instruction contradicts the project rules (`AGENTS.md`, `CLAUDE.md`, `GIGACODE.md`, and so on), stop and ask the user.
 
+**Documentation root.** Open `docs/_setup/progress.md` and find the line "Documentation root". If the file does not exist, find the file `_setup/progress.md` in the project. If the documentation root is not `docs/`:
+- in all paths of this prompt, replace `docs/` with the documentation root;
+- in each text that you move from the library to the project, also replace `docs/` with the documentation root.
+
 **If the work was interrupted:** open `docs/MAP.md`. Continue from the first block that is not filled in.
 
 ## Step 1. Read the result of the previous stage
